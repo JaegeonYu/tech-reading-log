@@ -66,6 +66,7 @@ async function main() {
     if (item.error) warnings.push(`#${issue.number}: ${item.error} — 건너뜀`);
     else items.push(item);
   }
+  items.sort((a, b) => a.number - b.number); // API는 최신순으로 주므로 기록한 순서로 되돌린다
   warnings.forEach((w) => console.warn(`warning: ${w}`));
 
   if (!items.length) {

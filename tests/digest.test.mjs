@@ -185,6 +185,16 @@ test('CLI: 실제 실행은 posts 파일과 issues 출력을 만들고 GitHub mi
   assert.match(out, /^issues=12,15$/m);
 });
 
+test('CLI: 최신순으로 온 이슈를 기록한 순서(번호 오름차순)로 정렬한다', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'digest-'));
+  const reversed = join(dir, 'reversed.json');
+  writeFileSync(reversed, JSON.stringify([...issues].reverse()));
+  const r = runCli(['--dry-run', '--no-llm', '--fixture', reversed, '--week', '2026-W42'], {}, dir);
+  assert.equal(r.status, 0, r.stderr);
+  assert.ok(r.stdout.indexOf('### 1. [Kafka') !== -1);
+  assert.ok(r.stdout.indexOf('- #12 ') < r.stdout.indexOf('- #15 '));
+});
+
 test('CLI: 대상이 없으면 정상 종료하고 PR을 만들지 않는다', () => {
   const empty = runCli(['--dry-run', '--no-llm', '--fixture', fileURLToPath(new URL('./fixtures/empty.json', import.meta.url))]);
   assert.equal(empty.status, 0, empty.stderr);
