@@ -14,6 +14,10 @@ jobs:
             const token = await core.getIDToken('https://api.anthropic.com');
             core.setSecret(token);
             core.exportVariable('JWT', token);
+            // 규칙과 비교할 수 있도록 서명을 뺀 payload의 주요 claim만 출력한다.
+            const claims = JSON.parse(Buffer.from(token.split('.')[1], 'base64url').toString());
+            const { iss, sub, aud, repository, repository_owner, ref, event_name, workflow } = claims;
+            console.log(JSON.stringify({ iss, sub, aud, repository, repository_owner, ref, event_name, workflow }, null, 2));
       - name: Exchange for an Anthropic access token
         run: |
           resp=$(curl -sS https://api.anthropic.com/v1/oauth/token \
@@ -30,5 +34,5 @@ jobs:
           JSON
           )
           echo "$resp" | jq 'with_entries(if (.key | test("token$")) then .value = "<redacted>" else . end)'
-          echo "$resp" | jq -e '.access_token | startswith("sk-ant-oat01-")' > /dev/null \
+          echo "$resp" | jq -e '(.access_token // "") | startswith("sk-ant-oat01-")' > /dev/null \
             || { echo "::error::토큰 교환 실패 — Console → Workload identity → History 탭에서 원인 확인"; exit 1; }
