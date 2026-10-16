@@ -28,6 +28,8 @@
 4. `reading` 라벨을 만듭니다: `gh label create reading --color 0E8A16`
 5. Actions → weekly-digest → **Run workflow**로 한 번 수동 실행해 동작을 확인합니다.
 
+요청 흐름, 실패 지점별 확인 방법, 직접 테스트하는 절차는 [docs/request-flow.md](docs/request-flow.md)에 있습니다.
+
 ## 운영 메모
 
 - **스케줄을 놓쳤을 때**: Run workflow로 수동 실행합니다. `week` 입력(예: `2026-W42`)으로 주차를 지정할 수도 있습니다.
