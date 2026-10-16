@@ -1,0 +1,76 @@
+name: weekly-digest
+
+on:
+  schedule:
+    # 일요일 18:00 KST. cron은 지연될 수 있어 KST 주 경계(일 24:00)보다 6시간 앞에 둔다.
+    - cron: '0 9 * * 0'
+  workflow_dispatch:
+    inputs:
+      week:
+        description: 'ISO 주차 (예: 2026-W42). 비우면 이번 주'
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: weekly-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch || github.ref_name }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm test
+
+      - name: Build digest
+        id: digest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL }}
+          WEEK: ${{ inputs.week }}
+        run: node scripts/digest.mjs --pr-body "$RUNNER_TEMP/pr-body.md" ${WEEK:+--week "$WEEK"}
+
+      - name: Open or update PR
+        if: steps.digest.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WEEK: ${{ steps.digest.outputs.week }}
+        run: |
+          branch="digest/$WEEK"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$branch"
+          git add "posts/$WEEK.md"
+          git diff --cached --quiet || git commit -m "digest: $WEEK 주간 포스트 초안"
+          git push --force origin "$branch"
+
+          pr=$(gh pr list --head "$branch" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$pr" ]; then
+            gh pr edit "$pr" --body-file "$RUNNER_TEMP/pr-body.md"
+            echo "PR #$pr 갱신"
+          else
+            gh pr create --head "$branch" \
+              --title "📚 $WEEK 주간 기술 읽기" --body-file "$RUNNER_TEMP/pr-body.md"
+          fi
+
+      # PR이 만들어진 뒤에만 milestone을 붙인다. 앞 단계가 실패하면 이슈는 다음 실행에 다시 모인다.
+      - name: Assign week milestone
+        if: steps.digest.outputs.count != '0'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/assign-milestone.mjs --week "${{ steps.digest.outputs.week }}" --issues "${{ steps.digest.outputs.issues }}"

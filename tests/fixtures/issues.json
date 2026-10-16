@@ -1,0 +1,33 @@
+[
+  {
+    "number": 12,
+    "title": "[읽음] Kafka 멱등 프로듀서",
+    "milestone": null,
+    "body": "### 링크\n\nhttps://example.com/kafka-idempotence\n\n### 글 제목\n\n_No response_\n\n### 키워드\n\nKafka, 멱등성, #exactly-once\n\n### 인상 깊은 문장\n\n재시도는 공짜가 아니다.\n\n### 이건 내가 쓴 소제목\n중복은 브로커가 막는다.\n\n### 내 생각\n\n우리 정산 배치에도 적용할 수 있을 것 같다."
+  },
+  {
+    "number": 15,
+    "title": "[읽음] ",
+    "milestone": { "number": 3, "title": "2026-W42" },
+    "body": "### 링크\r\n\r\nhttps://example.com/pg-index\r\n\r\n### 글 제목\r\n\r\nPostgreSQL [부분] 인덱스\r\n\r\n### 키워드\r\n\r\nPostgreSQL\r\n인덱스\r\n\r\n### 인상 깊은 문장\r\n\r\n_No response_\r\n\r\n### 내 생각\r\n\r\n_No response_"
+  },
+  {
+    "number": 9,
+    "title": "[읽음] 지난주 글",
+    "milestone": { "number": 2, "title": "2026-W41" },
+    "body": "### 링크\n\nhttps://example.com/last-week\n\n### 키워드\n\nold"
+  },
+  {
+    "number": 20,
+    "title": "digest PR",
+    "milestone": null,
+    "pull_request": { "url": "https://api.github.com/..." },
+    "body": "### 링크\n\nhttps://example.com/pr"
+  },
+  {
+    "number": 21,
+    "title": "[읽음] 링크 없음",
+    "milestone": null,
+    "body": "### 키워드\n\nbroken"
+  }
+]
