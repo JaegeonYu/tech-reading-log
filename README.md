@@ -15,9 +15,16 @@
 
 1. 이 저장소를 GitHub에 push합니다.
 2. Settings → Actions → General → Workflow permissions에서 **"Allow GitHub Actions to create and approve pull requests"**를 켭니다. 꺼져 있으면 PR 생성이 실패합니다.
-3. Settings → Secrets and variables → Actions에서 다음을 등록합니다.
-   - Secret `ANTHROPIC_API_KEY`
-   - (선택) Variable `ANTHROPIC_MODEL`. 기본값은 `claude-opus-5-5`이며, `claude-sonnet-5-5` 등으로 바꿀 수 있습니다.
+3. Claude API는 API 키 없이 **Workload Identity Federation(WIF)**으로 인증합니다. 실행마다 GitHub이 발급한 단기 토큰을 교환하므로 만료되거나 교체할 키가 없습니다.
+   - Claude Console → Settings → Workload identity → **Connect workload** → **GitHub Actions**를 선택합니다.
+   - 규칙의 subject prefix는 `repo:<owner>/tech-reading-log:ref:refs/heads/main`, audience는 `https://api.anthropic.com`으로 둡니다.
+   - Settings → Secrets and variables → Actions → **Variables**에 아래 값을 등록합니다. 비밀값이 아닌 ID들입니다.
+     - `ANTHROPIC_FEDERATION_RULE_ID` (`fdrl_...`)
+     - `ANTHROPIC_SERVICE_ACCOUNT_ID` (`svac_...`)
+     - `ANTHROPIC_ORGANIZATION_ID` (Console → Organization 페이지)
+     - (선택) `ANTHROPIC_WORKSPACE_ID`: 규칙이 여러 workspace에 걸칠 때만 필요합니다.
+     - (선택) `ANTHROPIC_MODEL`: 기본값은 `claude-opus-5-5`이며, `claude-sonnet-5-5` 등으로 바꿀 수 있습니다.
+   - 인증이 실패하면 Console → Workload identity → History 탭에서 원인을 볼 수 있습니다. 흔한 원인은 `main`이 아닌 브랜치에서 수동 실행한 경우입니다.
 4. `reading` 라벨을 만듭니다: `gh label create reading --color 0E8A16`
 5. Actions → weekly-digest → **Run workflow**로 한 번 수동 실행해 동작을 확인합니다.
 

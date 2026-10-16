@@ -14,6 +14,7 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  id-token: write # Claude API 인증(Workload Identity Federation)용 GitHub OIDC 토큰
 
 concurrency:
   group: weekly-digest
@@ -36,11 +37,23 @@ jobs:
 
       - run: npm test
 
+      # GitHub이 발급한 단기 신원 토큰(약 5분 유효)을 파일로 저장한다. SDK가 이를 Anthropic 접근 토큰으로 교환한다.
+      - name: Fetch GitHub OIDC token
+        run: |
+          curl -sSf -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://api.anthropic.com" \
+            | jq -r .value > "$RUNNER_TEMP/gha-jwt"
+
       - name: Build digest
         id: digest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # API 키 없이 WIF로 인증한다. ANTHROPIC_API_KEY를 넣으면 WIF보다 우선하므로 두지 않는다.
+          ANTHROPIC_FEDERATION_RULE_ID: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}
+          ANTHROPIC_ORGANIZATION_ID: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
+          ANTHROPIC_SERVICE_ACCOUNT_ID: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
+          ANTHROPIC_WORKSPACE_ID: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
+          ANTHROPIC_IDENTITY_TOKEN_FILE: ${{ runner.temp }}/gha-jwt
           ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL }}
           WEEK: ${{ inputs.week }}
         run: node scripts/digest.mjs --pr-body "$RUNNER_TEMP/pr-body.md" ${WEEK:+--week "$WEEK"}
