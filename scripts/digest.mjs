@@ -13,6 +13,7 @@ import {
   isoWeekKST,
   monthWeekLabel,
   parseWeek,
+  rawPostUrl,
   renderPost,
   renderPrBody,
   selectStale,
@@ -87,7 +88,8 @@ async function main() {
   }
 
   const post = renderPost({ week, items, summary });
-  const prBody = renderPrBody({ week, items, warnings });
+  const repo = process.env.GITHUB_REPOSITORY;
+  const prBody = renderPrBody({ week, items, warnings, rawUrl: repo ? rawPostUrl(repo, week) : null });
 
   if (args['dry-run']) {
     console.log(post);

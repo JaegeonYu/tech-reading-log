@@ -12,6 +12,7 @@ import {
   isoWeekKST,
   monthWeekLabel,
   parseIssueBody,
+  rawPostUrl,
   renderPost,
   renderPrBody,
   selectStale,
@@ -120,6 +121,13 @@ test('renderPost: 총평이 있으면 도입과 흐름 섹션을 넣는다', () 
   const post = renderPost({ week: '2026-W42', items, summary: { intro: '도입 문단', wrapup: '흐름 문단' } });
   assert.ok(post.indexOf('도입 문단') < post.indexOf('## 이번 주 읽은 글'));
   assert.ok(post.includes('## 이번 주 흐름\n\n흐름 문단'));
+});
+
+test('renderPrBody: Raw 링크는 있을 때만 넣는다', () => {
+  const url = rawPostUrl('JaegeonYu/tech-reading-log', '2026-W42');
+  assert.equal(url, 'https://raw.githubusercontent.com/JaegeonYu/tech-reading-log/refs/heads/digest/2026-W42/posts/2026-W42.md');
+  assert.ok(renderPrBody({ week: '2026-W42', items, warnings: [], rawUrl: url }).includes(`(${url})`));
+  assert.ok(!renderPrBody({ week: '2026-W42', items, warnings: [] }).includes('Raw'));
 });
 
 test('renderPrBody: 이슈마다 Closes, 경고 표시', () => {

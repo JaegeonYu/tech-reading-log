@@ -141,18 +141,26 @@ export function renderPost({ week, items, summary }) {
   return out.join('\n');
 }
 
-export function renderPrBody({ week, items, warnings }) {
+// 브랜치 이름에 '/'가 있어 refs/heads/를 붙여야 경로가 모호하지 않다.
+export function rawPostUrl(repo, week) {
+  return `https://raw.githubusercontent.com/${repo}/refs/heads/digest/${week}/posts/${week}.md`;
+}
+
+export function renderPrBody({ week, items, warnings, rawUrl }) {
   const out = [
     `## ${monthWeekLabel(week)} 주간 포스트 초안`,
     '',
     `\`posts/${week}.md\` 내용을 Tistory 에디터의 **마크다운 모드**에 붙여넣어 발행한 뒤 이 PR을 merge하세요.`,
     'merge하면 아래 기록 이슈가 자동으로 닫힙니다.',
     '',
+  ];
+  if (rawUrl) out.push(`📋 **[초안 원문(Raw) 열기](${rawUrl})** — 전체 선택(Ctrl+A) 후 복사해 붙여넣으세요.`, '');
+  out.push(
     `### 포함된 기록 (${items.length})`,
     '',
     ...items.map((i) => `- #${i.number} ${i.title}`),
     '',
-  ];
+  );
   if (warnings.length) out.push('### 경고', '', ...warnings.map((w) => `- ${w}`), '');
   out.push(...items.map((i) => `Closes #${i.number}`), '');
   return out.join('\n');
