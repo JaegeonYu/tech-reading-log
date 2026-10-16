@@ -10,6 +10,7 @@ import {
   SUMMARY_SCHEMA,
   generateSummary,
   isoWeekKST,
+  monthWeekLabel,
   parseIssueBody,
   renderPost,
   renderPrBody,
@@ -79,6 +80,14 @@ test('isoWeekKST: KST 경계와 연도 경계', () => {
   assert.equal(isoWeekKST(new Date('2027-01-04T03:00:00Z')), '2027-W01');
 });
 
+test('monthWeekLabel: 목요일이 속한 달 기준으로 몇째 주인지 센다', () => {
+  assert.equal(monthWeekLabel('2026-W42'), '2026년 10월 3주차'); // 10/12~10/18
+  assert.equal(monthWeekLabel('2026-W40'), '2026년 10월 1주차'); // 9/28~10/4, 목요일 10/1
+  assert.equal(monthWeekLabel('2026-W53'), '2026년 12월 5주차'); // 12/28~1/3, 목요일 12/31
+  assert.equal(monthWeekLabel('2027-W01'), '2027년 1월 1주차'); // 1/4~1/10
+  assert.equal(monthWeekLabel('2026-W44'), '2026년 10월 5주차'); // 10/26~11/1, 목요일 10/29
+});
+
 test('weekRange는 월~일 날짜를 돌려준다', () => {
   assert.equal(weekRange('2026-W42'), '10/12 ~ 10/18');
   assert.equal(weekRange('2026-W53'), '12/28 ~ 1/3');
@@ -94,7 +103,7 @@ test('renderPost: 링크, 키워드, 문장, 생각을 원문 그대로 담는�
     for (const line of item.quotes.split('\n').filter((l) => l.trim())) assert.ok(post.includes(`> ${line}`));
     if (item.thoughts) assert.ok(post.includes(item.thoughts));
   }
-  assert.ok(post.includes('# 주간 기술 읽기 — 2026년 42주차 (10/12 ~ 10/18)'));
+  assert.ok(post.includes('# 주간 기술 읽기 — 2026년 10월 3주차 (10/12 ~ 10/18)'));
   assert.ok(post.includes('[PostgreSQL \\[부분\\] 인덱스](https://example.com/pg-index)'));
   assert.ok(!post.includes('이번 주 흐름'));
 });

@@ -63,6 +63,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WEEK: ${{ steps.digest.outputs.week }}
+          TITLE: 📚 ${{ steps.digest.outputs.title }} 주간 기술 읽기
         run: |
           branch="digest/$WEEK"
           git config user.name "github-actions[bot]"
@@ -74,11 +75,10 @@ jobs:
 
           pr=$(gh pr list --head "$branch" --state open --json number --jq '.[0].number // empty')
           if [ -n "$pr" ]; then
-            gh pr edit "$pr" --body-file "$RUNNER_TEMP/pr-body.md"
+            gh pr edit "$pr" --title "$TITLE" --body-file "$RUNNER_TEMP/pr-body.md"
             echo "PR #$pr 갱신"
           else
-            gh pr create --head "$branch" \
-              --title "📚 $WEEK 주간 기술 읽기" --body-file "$RUNNER_TEMP/pr-body.md"
+            gh pr create --head "$branch" --title "$TITLE" --body-file "$RUNNER_TEMP/pr-body.md"
           fi
 
       # PR이 만들어진 뒤에만 milestone을 붙인다. 앞 단계가 실패하면 이슈는 다음 실행에 다시 모인다.

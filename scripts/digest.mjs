@@ -11,6 +11,7 @@ import {
   createGitHub,
   generateSummary,
   isoWeekKST,
+  monthWeekLabel,
   parseWeek,
   renderPost,
   renderPrBody,
@@ -103,7 +104,13 @@ async function main() {
   // milestone은 PR이 만들어진 뒤 scripts/assign-milestone.mjs가 붙인다.
   // 먼저 붙이면 PR 생성이 실패했을 때 이슈가 지난 주차에 묶인 채 빠진다.
   console.log(`${postPath} 작성 완료 (${items.length}건)`);
-  setOutput({ count: items.length, week, pr_body: prBodyPath, issues: items.map((i) => i.number).join(',') });
+  setOutput({
+    count: items.length,
+    week,
+    title: monthWeekLabel(week),
+    pr_body: prBodyPath,
+    issues: items.map((i) => i.number).join(','),
+  });
 }
 
 main().catch((err) => {

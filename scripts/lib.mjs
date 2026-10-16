@@ -90,10 +90,21 @@ export function parseWeek(label) {
   return { year: Number(m[1]), week: Number(m[2]) };
 }
 
-export function weekRange(label) {
+function weekMonday(label) {
   const { year, week } = parseWeek(label);
   const jan4 = new Date(Date.UTC(year, 0, 4));
-  const monday = new Date(jan4.getTime() - ((jan4.getUTCDay() || 7) - 1) * DAY_MS + (week - 1) * 7 * DAY_MS);
+  return new Date(jan4.getTime() - ((jan4.getUTCDay() || 7) - 1) * DAY_MS + (week - 1) * 7 * DAY_MS);
+}
+
+// '2026-W42' → '2026년 10월 3주차'. 두 달에 걸친 주는 목요일이 속한 달로 센다(ISO 주차와 같은 기준).
+export function monthWeekLabel(label) {
+  const thursday = new Date(weekMonday(label).getTime() + 3 * DAY_MS);
+  const nth = Math.ceil(thursday.getUTCDate() / 7);
+  return `${thursday.getUTCFullYear()}년 ${thursday.getUTCMonth() + 1}월 ${nth}주차`;
+}
+
+export function weekRange(label) {
+  const monday = weekMonday(label);
   const sunday = new Date(monday.getTime() + 6 * DAY_MS);
   const fmt = (d) => `${d.getUTCMonth() + 1}/${d.getUTCDate()}`;
   return `${fmt(monday)} ~ ${fmt(sunday)}`;
@@ -122,8 +133,7 @@ function renderItem(item, index) {
 }
 
 export function renderPost({ week, items, summary }) {
-  const { year, week: n } = parseWeek(week);
-  const out = [`# 주간 기술 읽기 — ${year}년 ${n}주차 (${weekRange(week)})`, ''];
+  const out = [`# 주간 기술 읽기 — ${monthWeekLabel(week)} (${weekRange(week)})`, ''];
   if (summary) out.push(summary.intro.trim(), '');
   out.push('## 이번 주 읽은 글', '', ...items.map(renderItem));
   if (summary) out.push('## 이번 주 흐름', '', summary.wrapup.trim(), '');
@@ -133,7 +143,7 @@ export function renderPost({ week, items, summary }) {
 
 export function renderPrBody({ week, items, warnings }) {
   const out = [
-    `## ${week} 주간 포스트 초안`,
+    `## ${monthWeekLabel(week)} 주간 포스트 초안`,
     '',
     `\`posts/${week}.md\` 내용을 Tistory 에디터의 **마크다운 모드**에 붙여넣어 발행한 뒤 이 PR을 merge하세요.`,
     'merge하면 아래 기록 이슈가 자동으로 닫힙니다.',
