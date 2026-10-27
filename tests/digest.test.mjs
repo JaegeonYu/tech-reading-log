@@ -162,7 +162,9 @@ test('generateSummary: 거절, 잘림, 잘못된 JSON은 에러', async () => {
   await assert.rejects(generateSummary(fakeClient({ stop_reason: 'end_turn', content: [{ type: 'text', text: '{"intro":"i"}' }] }), items), /intro\/wrapup/);
 });
 
-function runCli(args, env = {}, cwd = root) {
+// 기본 cwd는 매번 새 임시 폴더다. 저장소의 posts/에 발행된 주차가 있으면 CLI가 건너뛰므로,
+// 저장소 상태에 테스트 결과가 좌우되지 않게 한다.
+function runCli(args, env = {}, cwd = mkdtempSync(join(tmpdir(), 'digest-'))) {
   return spawnSync(process.execPath, [join(root, 'scripts/digest.mjs'), ...args], {
     cwd,
     encoding: 'utf8',
