@@ -1,0 +1,41 @@
+{
+  "flow": "summary",
+  "description": "주간 총평(generateSummary)이 기록 밖 내용을 쓰지 않는가",
+  "metrics": [
+    {
+      "id": "grounded",
+      "label": "① 기록 근거",
+      "kind": "binary"
+    },
+    {
+      "id": "thoughts",
+      "label": "② 생각 범위",
+      "kind": "binary"
+    },
+    {
+      "id": "no_forced",
+      "label": "③ 억지 연결X",
+      "kind": "binary"
+    },
+    {
+      "id": "format",
+      "label": "④ 형식",
+      "kind": "binary"
+    },
+    {
+      "id": "unsupported",
+      "label": "근거없는 문장",
+      "kind": "count",
+      "lower_is_better": true
+    }
+  ],
+  "perf_fields": [
+    "usage",
+    "cost_usd"
+  ],
+  "harness_paths": [
+    "evals/summary/grading.mjs",
+    "evals/summary/cases.json"
+  ],
+  "harness_sha": "f4c4566207443e7c98ad7b2ea695101a2e1185ebd23a65823e3b907bfdd79e6e"
+}

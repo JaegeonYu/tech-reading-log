@@ -1,0 +1,644 @@
+[
+  {
+    "id": "real-w43",
+    "tags": [
+      "real",
+      "2건"
+    ],
+    "source": "실제 기록 #4, #5",
+    "records": [
+      {
+        "title": "LLM이 만든 SQL을 믿고 실행하기까지: A2A 기반의 대화형 BI 애플리케이션 개발기",
+        "url": "https://techblog.lycorp.co.jp/ko/a2a-conversational-bi-app",
+        "keywords": [
+          "LLM",
+          "DDB"
+        ],
+        "quotes": "llm & sql\n운영환경에서도 실행 가능한 SQL 생성\n메타데이터 - SQL 생성\n온톨로지 DB - 수많은 DB 중 분석에 필요한 정보\nGraph DB vs Vector DB 도입 비용 문제",
+        "thoughts": "RDB의 데이터를 LLM이 사용할 수 있도록 정제하는 과정\n운영환경에서도 LLM을 통한 쿼리 생성이 가능한 날이 머지 않음\nGraph와 Vector의 도입 비용에 대한 생각도 필요"
+      },
+      {
+        "title": "리드타임 3일, 글로벌 매장 개발자가 출장지에서 일하는 법",
+        "url": "https://oliveyoung.tech/2026-09-14/global-store-new-way-of-working/",
+        "keywords": [
+          "PDA",
+          "Agile"
+        ],
+        "quotes": "물류 도메인의 '순환 재고조사' 업무\n현업담당자의 차이(국내, 해외)로 인한 요구사항 단순화",
+        "thoughts": "짧은 시간동안 현업담당자의 요구사항 중 가장 기초가 되는 것만 발라내고 빠른 개발 및 테스트 역량 중요"
+      }
+    ]
+  },
+  {
+    "id": "real-w45",
+    "tags": [
+      "real",
+      "1건"
+    ],
+    "source": "실제 기록 #7",
+    "records": [
+      {
+        "title": "알아두면 쓸데있는 LDAP",
+        "url": "https://www.samsungsds.com/kr/insights/ldap.html",
+        "keywords": [
+          "LDAP"
+        ],
+        "quotes": "TCP/IP 기반의 디렉토리 서비스를 제공하기 위한 프로토콜\n\n1) LDAP 구\nInformation 모델\nEntry : Attribute = 1 : N\nLDAP 디렉토리 구조는 Entry 데이터들을 트리 구조로 형성, 관리\nObjectClass는 엔트리에서 꼭 필요하거나 가질 수 있는 Attribute 타입을 정의합니다. Entry를 만들 때 ObjectClass를 통해 데이터에 필수적으로 들어가야 하는 정보를 담을 수 있게 정의할 수 있습니다. 또한 ObjectClass는 다른 ObjectClass를 상속해 구현하며 개념을 확장할 수 있습니다.\n\nSchema는 ObjectClass와 Attribute에 대해 정의하는 규칙으로 보면 됩니다. ObjectClass에 어떤 Attribute가 들어갈지, Attribute의 값에 대한 제약 및 조건 등 관련된 규칙들을 정의할 수 있습니다. 스키마 정의를 통해 여러 응용 프로그램에서 디렉토리 서비스를 읽고 사용할 때 상호운용성을 보호해주는 역할을 합니다.\n\n2) ldap server, client\nserver : open, apache, active\nclient : jndi, spring, unboundId",
+        "thoughts": "공인인증서 인증 과정에서 한국전자인증의 LDAP 호출을 통해 폐기된 인증서 목록과 CA 인증서 발급 등이 진행됨.\nLDAP은 평소에 많이 들어봤지만 정확한 뜻은 몰랐음.\nLDAP은 디렉토리 서비스 제공을 위한 프로토콜이라는걸 인지"
+      }
+    ]
+  },
+  {
+    "id": "sparse-1",
+    "tags": [
+      "sparse",
+      "2건"
+    ],
+    "records": [
+      {
+        "title": "트랜잭션 격리 수준 다시 보기",
+        "url": "https://example.com/blog/isolation-level",
+        "keywords": [
+          "MVCC"
+        ],
+        "quotes": "",
+        "thoughts": ""
+      },
+      {
+        "title": "사내 배포 파이프라인 개선기",
+        "url": "https://example.com/blog/deploy-pipeline",
+        "keywords": [
+          "CI/CD",
+          "ArgoCD"
+        ],
+        "quotes": "롤백 3분",
+        "thoughts": "우리도?"
+      }
+    ]
+  },
+  {
+    "id": "sparse-2",
+    "tags": [
+      "sparse",
+      "1건"
+    ],
+    "records": [
+      {
+        "title": "Redis 캐시 스탬피드 대응",
+        "url": "https://example.com/blog/cache-stampede",
+        "keywords": [
+          "Redis"
+        ],
+        "quotes": "PER",
+        "thoughts": "TTL 지터"
+      }
+    ]
+  },
+  {
+    "id": "sparse-3",
+    "tags": [
+      "sparse",
+      "2건"
+    ],
+    "records": [
+      {
+        "title": "Spring Batch 대용량 처리 튜닝",
+        "url": "https://example.com/blog/spring-batch-tuning",
+        "keywords": [
+          "Batch",
+          "chunk"
+        ],
+        "quotes": "chunk size 1000 → 5000",
+        "thoughts": "회사 배치 확인"
+      },
+      {
+        "title": "JVM GC 로그 읽는 법",
+        "url": "https://example.com/blog/gc-log",
+        "keywords": [
+          "G1GC"
+        ],
+        "quotes": "",
+        "thoughts": "STW"
+      }
+    ]
+  },
+  {
+    "id": "sparse-4",
+    "tags": [
+      "sparse",
+      "3건"
+    ],
+    "records": [
+      {
+        "title": "모노레포 전환 회고",
+        "url": "https://example.com/blog/monorepo",
+        "keywords": [
+          "Nx"
+        ],
+        "quotes": "빌드 캐시",
+        "thoughts": ""
+      },
+      {
+        "title": "코드 리뷰 문화 만들기",
+        "url": "https://example.com/blog/code-review-culture",
+        "keywords": [
+          "리뷰"
+        ],
+        "quotes": "",
+        "thoughts": "PR 크기"
+      },
+      {
+        "title": "OAuth 2.1 변경점",
+        "url": "https://example.com/blog/oauth21",
+        "keywords": [
+          "PKCE"
+        ],
+        "quotes": "implicit 제거",
+        "thoughts": ""
+      }
+    ]
+  },
+  {
+    "id": "sparse-5",
+    "tags": [
+      "sparse",
+      "1건"
+    ],
+    "records": [
+      {
+        "title": "쿠버네티스 HPA 오해와 진실",
+        "url": "https://example.com/blog/k8s-hpa",
+        "keywords": [
+          "HPA",
+          "k8s"
+        ],
+        "quotes": "",
+        "thoughts": "metrics-server"
+      }
+    ]
+  },
+  {
+    "id": "sparse-6",
+    "tags": [
+      "sparse",
+      "2건"
+    ],
+    "records": [
+      {
+        "title": "Elasticsearch 샤드 설계",
+        "url": "https://example.com/blog/es-shard",
+        "keywords": [
+          "ES",
+          "shard"
+        ],
+        "quotes": "샤드당 30GB",
+        "thoughts": "??"
+      },
+      {
+        "title": "테스트 픽스처 관리",
+        "url": "https://example.com/blog/test-fixture",
+        "keywords": [
+          "Fixture Monkey"
+        ],
+        "quotes": "",
+        "thoughts": "도입 검토"
+      }
+    ]
+  },
+  {
+    "id": "empty-1",
+    "tags": [
+      "empty-thoughts",
+      "1건"
+    ],
+    "records": [
+      {
+        "title": "Kafka 컨슈머 리밸런싱 줄이기",
+        "url": "https://example.com/blog/kafka-rebalance",
+        "keywords": [
+          "Kafka",
+          "Cooperative Sticky"
+        ],
+        "quotes": "Eager 리밸런싱은 모든 파티션 할당을 해제한 뒤 다시 할당한다\nCooperativeStickyAssignor는 이동이 필요한 파티션만 회수한다\nstatic membership으로 재시작 시 리밸런싱 회피",
+        "thoughts": ""
+      }
+    ]
+  },
+  {
+    "id": "empty-2",
+    "tags": [
+      "empty-thoughts",
+      "2건"
+    ],
+    "records": [
+      {
+        "title": "PostgreSQL VACUUM 이해하기",
+        "url": "https://example.com/blog/pg-vacuum",
+        "keywords": [
+          "PostgreSQL",
+          "VACUUM"
+        ],
+        "quotes": "dead tuple\nautovacuum_vacuum_scale_factor 기본 0.2\nXID wraparound",
+        "thoughts": "Oracle의 undo와 비교해 보면 재밌을 듯. 오라클은 undo 세그먼트에서 이전 버전을 읽는데 PG는 테이블에 남긴다"
+      },
+      {
+        "title": "gRPC 도입기",
+        "url": "https://example.com/blog/grpc",
+        "keywords": [
+          "gRPC",
+          "protobuf"
+        ],
+        "quotes": "HTTP/2 멀티플렉싱\n스키마 우선 개발\n브라우저는 grpc-web 필요",
+        "thoughts": ""
+      }
+    ]
+  },
+  {
+    "id": "empty-3",
+    "tags": [
+      "empty-thoughts",
+      "2건"
+    ],
+    "records": [
+      {
+        "title": "분산 락 구현 비교",
+        "url": "https://example.com/blog/distributed-lock",
+        "keywords": [
+          "Redisson",
+          "ZooKeeper"
+        ],
+        "quotes": "Redlock 논쟁\n펜싱 토큰",
+        "thoughts": ""
+      },
+      {
+        "title": "API 레이트 리미터 설계",
+        "url": "https://example.com/blog/rate-limiter",
+        "keywords": [
+          "Token Bucket"
+        ],
+        "quotes": "토큰 버킷 vs 슬라이딩 윈도우\n분산 환경에서는 중앙 저장소 필요",
+        "thoughts": ""
+      }
+    ]
+  },
+  {
+    "id": "empty-4",
+    "tags": [
+      "empty-thoughts",
+      "3건"
+    ],
+    "records": [
+      {
+        "title": "인덱스 스킵 스캔은 언제 쓰일까",
+        "url": "https://example.com/blog/index-skip-scan",
+        "keywords": [
+          "Oracle",
+          "Index Skip Scan"
+        ],
+        "quotes": "선두 컬럼의 distinct 값이 적을 때\n선두 컬럼 조건이 없어도 인덱스 사용",
+        "thoughts": "SQLP 3장과 연결. 실습에서 확인해 보고 싶음"
+      },
+      {
+        "title": "옵티마이저 통계 수집 전략",
+        "url": "https://example.com/blog/dbms-stats",
+        "keywords": [
+          "DBMS_STATS"
+        ],
+        "quotes": "히스토그램\n통계 잠금",
+        "thoughts": ""
+      },
+      {
+        "title": "실행계획 고정하기 (SPM)",
+        "url": "https://example.com/blog/spm",
+        "keywords": [
+          "SPM",
+          "Baseline"
+        ],
+        "quotes": "SQL Plan Baseline으로 계획 회귀 방지",
+        "thoughts": ""
+      }
+    ]
+  },
+  {
+    "id": "empty-5",
+    "tags": [
+      "empty-thoughts",
+      "1건"
+    ],
+    "records": [
+      {
+        "title": "WebSocket 대규모 연결 처리",
+        "url": "https://example.com/blog/websocket-scale",
+        "keywords": [
+          "WebSocket",
+          "Netty"
+        ],
+        "quotes": "커넥션당 메모리\nepoll",
+        "thoughts": ""
+      }
+    ]
+  },
+  {
+    "id": "empty-6",
+    "tags": [
+      "empty-thoughts",
+      "2건"
+    ],
+    "records": [
+      {
+        "title": "이벤트 소싱 실전 적용",
+        "url": "https://example.com/blog/event-sourcing",
+        "keywords": [
+          "Event Sourcing",
+          "CQRS"
+        ],
+        "quotes": "스냅샷으로 재생 비용 감소\n이벤트 스키마 버전 관리",
+        "thoughts": "도입 비용이 커 보임. 감사 로그가 중요한 도메인에서만 의미가 있을 듯"
+      },
+      {
+        "title": "Outbox 패턴과 CDC",
+        "url": "https://example.com/blog/outbox-cdc",
+        "keywords": [
+          "Outbox",
+          "Debezium"
+        ],
+        "quotes": "트랜잭션과 메시지 발행의 원자성\nbinlog 기반 CDC",
+        "thoughts": ""
+      }
+    ]
+  },
+  {
+    "id": "unrelated-1",
+    "tags": [
+      "unrelated",
+      "2건"
+    ],
+    "records": [
+      {
+        "title": "Kotlin 코루틴 구조적 동시성",
+        "url": "https://example.com/blog/kotlin-coroutine",
+        "keywords": [
+          "Kotlin",
+          "Coroutine"
+        ],
+        "quotes": "부모 코루틴 취소 시 자식도 취소\nSupervisorJob",
+        "thoughts": "자바 가상 스레드와 비교해 보고 싶다"
+      },
+      {
+        "title": "사내 디자인 시스템 구축기",
+        "url": "https://example.com/blog/design-system",
+        "keywords": [
+          "Design System",
+          "Figma"
+        ],
+        "quotes": "토큰 기반 테마\n컴포넌트 문서화",
+        "thoughts": "백엔드 입장에선 API 스펙 문서화와 비슷한 고민"
+      }
+    ]
+  },
+  {
+    "id": "unrelated-2",
+    "tags": [
+      "unrelated",
+      "3건"
+    ],
+    "records": [
+      {
+        "title": "리눅스 OOM Killer 동작 원리",
+        "url": "https://example.com/blog/oom-killer",
+        "keywords": [
+          "Linux",
+          "OOM"
+        ],
+        "quotes": "oom_score_adj\n메모리 오버커밋",
+        "thoughts": "컨테이너가 이유 없이 죽던 사례 생각남"
+      },
+      {
+        "title": "개발자의 글쓰기",
+        "url": "https://example.com/blog/dev-writing",
+        "keywords": [
+          "글쓰기"
+        ],
+        "quotes": "두괄식\n독자를 정하고 쓴다",
+        "thoughts": "블로그 글에 적용"
+      },
+      {
+        "title": "엑셀 대용량 다운로드 개선",
+        "url": "https://example.com/blog/excel-download",
+        "keywords": [
+          "Apache POI",
+          "SXSSF"
+        ],
+        "quotes": "SXSSF 스트리밍 방식\n행 단위로 임시 파일에 기록",
+        "thoughts": ""
+      }
+    ]
+  },
+  {
+    "id": "unrelated-3",
+    "tags": [
+      "unrelated",
+      "2건"
+    ],
+    "records": [
+      {
+        "title": "DNS 캐시와 장애",
+        "url": "https://example.com/blog/dns-cache",
+        "keywords": [
+          "DNS",
+          "TTL"
+        ],
+        "quotes": "JVM DNS 캐시 기본값\nnegative cache",
+        "thoughts": "회사에서 특정 도메인만 접속 안 되던 일과 비교해 볼 것"
+      },
+      {
+        "title": "팀 온보딩 문서 만들기",
+        "url": "https://example.com/blog/onboarding-doc",
+        "keywords": [
+          "온보딩"
+        ],
+        "quotes": "첫 주 체크리스트",
+        "thoughts": ""
+      }
+    ]
+  },
+  {
+    "id": "unrelated-4",
+    "tags": [
+      "unrelated",
+      "2건"
+    ],
+    "records": [
+      {
+        "title": "LLM 프롬프트 캐싱으로 비용 줄이기",
+        "url": "https://example.com/blog/prompt-caching",
+        "keywords": [
+          "LLM",
+          "Prompt Caching"
+        ],
+        "quotes": "고정 프롬프트를 앞에\n캐시 히트율 모니터링",
+        "thoughts": "주간 읽기 자동화에도 적용 가능할지"
+      },
+      {
+        "title": "B-Tree와 LSM-Tree",
+        "url": "https://example.com/blog/btree-lsm",
+        "keywords": [
+          "B-Tree",
+          "LSM"
+        ],
+        "quotes": "쓰기 증폭 vs 읽기 증폭\n컴팩션",
+        "thoughts": "RocksDB"
+      }
+    ]
+  },
+  {
+    "id": "unrelated-5",
+    "tags": [
+      "unrelated",
+      "3건"
+    ],
+    "records": [
+      {
+        "title": "애자일 회고 진행 방법",
+        "url": "https://example.com/blog/retro",
+        "keywords": [
+          "회고",
+          "KPT"
+        ],
+        "quotes": "Keep, Problem, Try",
+        "thoughts": "스터디 회고에도 써볼 것"
+      },
+      {
+        "title": "HTTP/3와 QUIC",
+        "url": "https://example.com/blog/http3",
+        "keywords": [
+          "HTTP/3",
+          "QUIC"
+        ],
+        "quotes": "UDP 기반\nHead-of-line blocking 해소",
+        "thoughts": ""
+      },
+      {
+        "title": "Java 21 가상 스레드 실전",
+        "url": "https://example.com/blog/virtual-thread",
+        "keywords": [
+          "Virtual Thread"
+        ],
+        "quotes": "pinning\nsynchronized 블록 주의",
+        "thoughts": "커넥션 풀 크기와의 관계 궁금"
+      }
+    ]
+  },
+  {
+    "id": "normal-1",
+    "tags": [
+      "normal",
+      "2건"
+    ],
+    "records": [
+      {
+        "title": "MySQL 인덱스 설계 실수 모음",
+        "url": "https://example.com/blog/mysql-index-mistakes",
+        "keywords": [
+          "MySQL",
+          "Index"
+        ],
+        "quotes": "카디널리티 낮은 컬럼 선두 배치\n커버링 인덱스로 테이블 접근 제거",
+        "thoughts": "Oracle에서도 같은 원리. 클러스터링 팩터 개념과 연결해서 이해"
+      },
+      {
+        "title": "슬로우 쿼리 분석 자동화",
+        "url": "https://example.com/blog/slow-query",
+        "keywords": [
+          "Slow Query",
+          "pt-query-digest"
+        ],
+        "quotes": "쿼리 지문(fingerprint)으로 묶어서 상위 N개 관리",
+        "thoughts": "회사에서도 AWR 리포트로 비슷하게 할 수 있을 듯"
+      }
+    ]
+  },
+  {
+    "id": "normal-2",
+    "tags": [
+      "normal",
+      "2건"
+    ],
+    "records": [
+      {
+        "title": "서킷 브레이커 적용기",
+        "url": "https://example.com/blog/circuit-breaker",
+        "keywords": [
+          "Resilience4j",
+          "Circuit Breaker"
+        ],
+        "quotes": "실패율 임계치\nhalf-open 상태",
+        "thoughts": "외부 API 장애가 전체 장애로 번지는 걸 막는 장치"
+      },
+      {
+        "title": "타임아웃 설정의 모든 것",
+        "url": "https://example.com/blog/timeouts",
+        "keywords": [
+          "Timeout"
+        ],
+        "quotes": "connect timeout과 read timeout 구분\n상위 타임아웃이 하위보다 길어야 한다",
+        "thoughts": "우리 서비스는 기본값 그대로인 곳이 많음"
+      }
+    ]
+  },
+  {
+    "id": "normal-3",
+    "tags": [
+      "normal",
+      "3건"
+    ],
+    "records": [
+      {
+        "title": "Kafka 정확히 한 번 처리",
+        "url": "https://example.com/blog/kafka-eos",
+        "keywords": [
+          "Kafka",
+          "EOS"
+        ],
+        "quotes": "멱등 프로듀서\n트랜잭셔널 ID",
+        "thoughts": "Kafka 공부 시작 전에 개념 정리용으로 좋았음"
+      },
+      {
+        "title": "컨슈머 오프셋 관리 전략",
+        "url": "https://example.com/blog/consumer-offset",
+        "keywords": [
+          "Offset"
+        ],
+        "quotes": "auto commit의 함정\n처리 후 커밋",
+        "thoughts": "중복 처리 가능성 항상 고려"
+      },
+      {
+        "title": "Kafka 모니터링 지표",
+        "url": "https://example.com/blog/kafka-metrics",
+        "keywords": [
+          "Lag"
+        ],
+        "quotes": "컨슈머 lag\nunder-replicated partitions",
+        "thoughts": ""
+      }
+    ]
+  },
+  {
+    "id": "normal-4",
+    "tags": [
+      "normal",
+      "1건"
+    ],
+    "records": [
+      {
+        "title": "테스트 피라미드 다시 보기",
+        "url": "https://example.com/blog/test-pyramid",
+        "keywords": [
+          "Test"
+        ],
+        "quotes": "단위 테스트 비중\n통합 테스트는 핵심 경로만",
+        "thoughts": "개인 프로젝트 테스트 구조와 비교해 보니 단위 테스트 위주로 잘 짜여 있음"
+      }
+    ]
+  }
+]

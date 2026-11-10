@@ -185,7 +185,8 @@ export function buildUserPrompt(items) {
   return `이번 주 읽기 기록입니다.\n\n<records>\n${JSON.stringify(records, null, 2)}\n</records>`;
 }
 
-export async function generateSummary(client, items, { model = DEFAULT_MODEL } = {}) {
+// onResponse: 평가 러너가 model·usage·stop_reason을 기록하려고 받는 훅 (운영 경로에선 쓰지 않음)
+export async function generateSummary(client, items, { model = DEFAULT_MODEL, onResponse } = {}) {
   const response = await client.beta.messages.create({
     model,
     max_tokens: 16000,
@@ -195,6 +196,7 @@ export async function generateSummary(client, items, { model = DEFAULT_MODEL } =
     system: SYSTEM_PROMPT,
     messages: [{ role: 'user', content: buildUserPrompt(items) }],
   });
+  onResponse?.(response);
   if (response.stop_reason === 'refusal') {
     throw new Error(`모델이 요청을 거절함 (${response.stop_details?.category ?? 'unknown'})`);
   }
